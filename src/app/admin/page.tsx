@@ -3486,6 +3486,30 @@ const EmbyConfigComponent = ({
     });
   };
 
+  const handleClearCache = async () => {
+    await withLoading('clearEmbyCache', async () => {
+      try {
+        const response = await fetch('/api/admin/emby', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'clearCache',
+          }),
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          showSuccess(data.message || '缓存清除成功', showAlert);
+        } else {
+          showError(data.message || '缓存清除失败', showAlert);
+        }
+      } catch (error) {
+        showError(error instanceof Error ? error.message : '缓存清除失败', showAlert);
+      }
+    });
+  };
+
   return (
     <div className='space-y-6'>
       <AlertModal
@@ -3609,6 +3633,17 @@ const EmbyConfigComponent = ({
           className='px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg transition-colors'
         >
           {isLoading('saveEmby') ? '保存中...' : '保存配置'}
+        </button>
+      </div>
+
+      {/* 清除缓存按钮 */}
+      <div className='flex gap-3'>
+        <button
+          onClick={handleClearCache}
+          disabled={isLoading('clearEmbyCache')}
+          className='px-4 py-2 bg-orange-600 hover:bg-orange-700 disabled:bg-orange-400 text-white rounded-lg transition-colors'
+        >
+          {isLoading('clearEmbyCache') ? '清除中...' : '清除缓存'}
         </button>
       </div>
     </div>

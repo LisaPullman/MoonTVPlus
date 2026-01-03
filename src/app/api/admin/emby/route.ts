@@ -6,6 +6,7 @@ import { getAuthInfoFromCookie } from '@/lib/auth';
 import { getConfig } from '@/lib/config';
 import { db } from '@/lib/db';
 import { EmbyClient } from '@/lib/emby.client';
+import { clearEmbyCache } from '@/lib/emby-cache';
 
 export const runtime = 'nodejs';
 
@@ -173,6 +174,16 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({
         success: true,
         message: 'Emby 连接测试成功',
+      });
+    }
+
+    if (action === 'clearCache') {
+      // 清除缓存
+      const result = clearEmbyCache();
+      return NextResponse.json({
+        success: true,
+        message: `已清除 ${result.cleared} 条 Emby 缓存`,
+        cleared: result.cleared,
       });
     }
 

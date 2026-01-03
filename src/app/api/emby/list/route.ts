@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { getConfig } from '@/lib/config';
 import { EmbyClient } from '@/lib/emby.client';
+import { getCachedEmbyList, setCachedEmbyList } from '@/lib/emby-cache';
 
 export const runtime = 'nodejs';
 
@@ -13,6 +14,12 @@ export async function GET(request: NextRequest) {
   const pageSize = parseInt(searchParams.get('pageSize') || '20');
 
   try {
+    // 检查缓存
+    const cached = getCachedEmbyList(page, pageSize);
+    if (cached) {
+      return NextResponse.json(cached);
+    }
+
     const config = await getConfig();
     const embyConfig = config.EmbyConfig;
 
@@ -78,13 +85,18 @@ export async function GET(request: NextRequest) {
 
     const totalPages = Math.ceil(result.TotalRecordCount / pageSize);
 
-    return NextResponse.json({
+    const response = {
       success: true,
       list,
       totalPages,
       currentPage: page,
       total: result.TotalRecordCount,
-    });
+    };
+
+    // 缓存结果
+    setCachedEmbyList(page, pageSize, response);
+
+    return NextResponse.json(response);
   } catch (error) {
     console.error('获取 Emby 列表失败:', error);
     return NextResponse.json({
