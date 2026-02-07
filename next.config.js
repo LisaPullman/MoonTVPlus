@@ -1,12 +1,14 @@
 /** @type {import('next').NextConfig} */
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-// 检测是否为 Cloudflare Pages 构建
+// 检测构建环境
 const isCloudflare = process.env.CF_PAGES === '1' || process.env.BUILD_TARGET === 'cloudflare';
+const isVercel = process.env.VERCEL === '1' || process.env.VERCEL_ENV !== undefined;
 
 const nextConfig = {
-  // Cloudflare Pages 不支持 standalone，使用默认输出
-  output: isCloudflare ? undefined : 'standalone',
+  // Cloudflare Pages 和 Vercel 都不需要 standalone 模式
+  // standalone 仅用于传统 Node.js 服务器部署
+  output: undefined,
   eslint: {
     dirs: ['src'],
     // 在生产构建时忽略 ESLint 错误
