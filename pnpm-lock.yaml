@@ -113,6 +113,9 @@ importers:
       parse-torrent-name:
         specifier: ^0.5.4
         version: 0.5.4
+      pg:
+        specifier: ^8.18.0
+        version: 8.18.0
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -139,10 +142,10 @@ importers:
         version: 0.0.1
       socket.io:
         specifier: ^4.8.1
-        version: 4.8.3
+        version: 4.8.3(bufferutil@4.1.0)
       socket.io-client:
         specifier: ^4.8.1
-        version: 4.8.3
+        version: 4.8.3(bufferutil@4.1.0)
       swiper:
         specifier: ^11.2.8
         version: 11.2.10
@@ -167,7 +170,7 @@ importers:
         version: 16.2.4
       '@opennextjs/cloudflare':
         specifier: ^1.15.1
-        version: 1.15.1(next@14.2.35(@babel/core@7.28.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(wrangler@4.60.0)
+        version: 1.15.1(next@14.2.35(@babel/core@7.28.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(wrangler@4.60.0(bufferutil@4.1.0))
       '@svgr/webpack':
         specifier: ^8.1.0
         version: 8.1.0(typescript@4.9.5)
@@ -248,7 +251,7 @@ importers:
         version: 7.0.4
       jest:
         specifier: ^27.5.1
-        version: 27.5.1(ts-node@10.9.2(@types/node@24.0.3)(typescript@4.9.5))
+        version: 27.5.1(bufferutil@4.1.0)(ts-node@10.9.2(@types/node@24.0.3)(typescript@4.9.5))
       lint-staged:
         specifier: ^12.5.0
         version: 12.5.0(enquirer@2.4.1)
@@ -4347,6 +4350,10 @@ packages:
   buffer@5.7.1:
     resolution: {integrity: sha512-EHcyIPBQ4BSGlvjB16k5KgAJ27CIsHY/2JBmCRReo48y9rQ3MaUzWX3KVlBa4U7MyX02HdVj0K7C3WaB3ju7FQ==}
 
+  bufferutil@4.1.0:
+    resolution: {integrity: sha512-ZMANVnAixE6AWWnPzlW2KpUrxhm9woycYvPOo67jWHyFowASTEd9s+QN1EIMsSDtwhIxN4sWE1jotpuDUIgyIw==}
+    engines: {node: '>=6.14.2'}
+
   builtin-modules@3.3.0:
     resolution: {integrity: sha512-zhaCDicdLuWN5UbN5IMnFqNMhNfo919sH85y2/ea+5Yg9TsTkeZxpL+JLbp6cgYFS4sRLp3YV4S6yDuqVWHYOw==}
     engines: {node: '>=6'}
@@ -7202,9 +7209,20 @@ packages:
   pend@1.2.0:
     resolution: {integrity: sha512-F3asv42UuXchdzt+xXqfW1OGlVBe+mxa2mqI0pg5yAHZPvFmY3Y6drSf/GQ1A86WgWEN9Kzh/WrgKa6iGcHXLg==}
 
+  pg-cloudflare@1.3.0:
+    resolution: {integrity: sha512-6lswVVSztmHiRtD6I8hw4qP/nDm1EJbKMRhf3HCYaqud7frGysPv7FYJ5noZQdhQtN2xJnimfMtvQq21pdbzyQ==}
+
+  pg-connection-string@2.11.0:
+    resolution: {integrity: sha512-kecgoJwhOpxYU21rZjULrmrBJ698U2RxXofKVzOn5UDj61BPj/qMb7diYUR1nLScCDbrztQFl1TaQZT0t1EtzQ==}
+
   pg-int8@1.0.1:
     resolution: {integrity: sha512-WCtabS6t3c8SkpDBUlb1kjOs7l66xsGdKpIPZsg4wR+B3+u9UAum2odSsF9tnvxg80h4ZxLWMy4pRjOsFIqQpw==}
     engines: {node: '>=4.0.0'}
+
+  pg-pool@3.11.0:
+    resolution: {integrity: sha512-MJYfvHwtGp870aeusDh+hg9apvOe2zmpZJpyt+BMtzUWlVqbhFmMK6bOBXLBUPd7iRtIF9fZplDc7KrPN3PN7w==}
+    peerDependencies:
+      pg: '>=8.0'
 
   pg-protocol@1.11.0:
     resolution: {integrity: sha512-pfsxk2M9M3BuGgDOfuy37VNRRX3jmKgMjcvAcWqNDpZSf4cUmv8HSOl5ViRQFsfARFn0KuUQTgLxVMbNq5NW3g==}
@@ -7212,6 +7230,18 @@ packages:
   pg-types@2.2.0:
     resolution: {integrity: sha512-qTAAlrEsl8s4OiEQY69wDvcMIdQN6wdz5ojQiOy6YRMuynxenON0O5oCpJI6lshc6scgAY8qvJ2On/p+CXY0GA==}
     engines: {node: '>=4'}
+
+  pg@8.18.0:
+    resolution: {integrity: sha512-xqrUDL1b9MbkydY/s+VZ6v+xiMUmOUk7SS9d/1kpyQxoJ6U9AO1oIJyUWVZojbfe5Cc/oluutcgFG4L9RDP1iQ==}
+    engines: {node: '>= 16.0.0'}
+    peerDependencies:
+      pg-native: '>=3.0.1'
+    peerDependenciesMeta:
+      pg-native:
+        optional: true
+
+  pgpass@1.0.5:
+    resolution: {integrity: sha512-FdW9r/jQZhSeohs1Z3sI1yxFQNFvMcnmfuj4WBMUTxOrAyLMaTcE1aAMBiTlbMNaXvBCQuVi0R7hd8udDSP7ug==}
 
   picocolors@1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
@@ -7923,6 +7953,10 @@ packages:
 
   split2@3.2.2:
     resolution: {integrity: sha512-9NThjpgZnifTkJpzTZ7Eue85S49QwpNhZTq6GRJwObb6jnLFNGB7Qm73V5HewTROPyxD0C29xqmaI68bQtV+hg==}
+
+  split2@4.2.0:
+    resolution: {integrity: sha512-UcjcJOWknrNkF6PLX83qcHM6KHgVKNkV62Y8a5uYDVv9ydGQVwAHMKqHdJje1VTWpljG0WYpCDhrCdAOYH4TWg==}
+    engines: {node: '>= 10.x'}
 
   sprintf-js@1.0.3:
     resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
@@ -11956,7 +11990,7 @@ snapshots:
       jest-util: 27.5.1
       slash: 3.0.0
 
-  '@jest/core@27.5.1(ts-node@10.9.2(@types/node@24.0.3)(typescript@4.9.5))':
+  '@jest/core@27.5.1(bufferutil@4.1.0)(ts-node@10.9.2(@types/node@24.0.3)(typescript@4.9.5))':
     dependencies:
       '@jest/console': 27.5.1
       '@jest/reporters': 27.5.1
@@ -11970,13 +12004,13 @@ snapshots:
       exit: 0.1.2
       graceful-fs: 4.2.11
       jest-changed-files: 27.5.1
-      jest-config: 27.5.1(ts-node@10.9.2(@types/node@24.0.3)(typescript@4.9.5))
+      jest-config: 27.5.1(bufferutil@4.1.0)(ts-node@10.9.2(@types/node@24.0.3)(typescript@4.9.5))
       jest-haste-map: 27.5.1
       jest-message-util: 27.5.1
       jest-regex-util: 27.5.1
       jest-resolve: 27.5.1
       jest-resolve-dependencies: 27.5.1
-      jest-runner: 27.5.1
+      jest-runner: 27.5.1(bufferutil@4.1.0)
       jest-runtime: 27.5.1
       jest-snapshot: 27.5.1
       jest-util: 27.5.1
@@ -12274,7 +12308,7 @@ snapshots:
       - aws-crt
       - supports-color
 
-  '@opennextjs/cloudflare@1.15.1(next@14.2.35(@babel/core@7.28.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(wrangler@4.60.0)':
+  '@opennextjs/cloudflare@1.15.1(next@14.2.35(@babel/core@7.28.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(wrangler@4.60.0(bufferutil@4.1.0))':
     dependencies:
       '@ast-grep/napi': 0.40.0
       '@dotenvx/dotenvx': 1.31.0
@@ -12284,7 +12318,7 @@ snapshots:
       glob: 12.0.0
       next: 14.2.35(@babel/core@7.28.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       ts-tqdm: 0.8.6
-      wrangler: 4.60.0
+      wrangler: 4.60.0(bufferutil@4.1.0)
       yargs: 18.0.0
     transitivePeerDependencies:
       - aws-crt
@@ -14585,6 +14619,11 @@ snapshots:
       base64-js: 1.5.1
       ieee754: 1.2.1
 
+  bufferutil@4.1.0:
+    dependencies:
+      node-gyp-build: 4.8.4
+    optional: true
+
   builtin-modules@3.3.0: {}
 
   busboy@1.6.0:
@@ -15193,12 +15232,12 @@ snapshots:
     dependencies:
       once: 1.4.0
 
-  engine.io-client@6.6.4:
+  engine.io-client@6.6.4(bufferutil@4.1.0):
     dependencies:
       '@socket.io/component-emitter': 3.1.2
       debug: 4.4.3(supports-color@9.4.0)
       engine.io-parser: 5.2.3
-      ws: 8.18.3
+      ws: 8.18.3(bufferutil@4.1.0)
       xmlhttprequest-ssl: 2.1.2
     transitivePeerDependencies:
       - bufferutil
@@ -15207,7 +15246,7 @@ snapshots:
 
   engine.io-parser@5.2.3: {}
 
-  engine.io@6.6.5:
+  engine.io@6.6.5(bufferutil@4.1.0):
     dependencies:
       '@types/cors': 2.8.19
       '@types/node': 24.0.3
@@ -15217,7 +15256,7 @@ snapshots:
       cors: 2.8.5
       debug: 4.4.3(supports-color@9.4.0)
       engine.io-parser: 5.2.3
-      ws: 8.18.3
+      ws: 8.18.3(bufferutil@4.1.0)
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -16598,16 +16637,16 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  jest-cli@27.5.1(ts-node@10.9.2(@types/node@24.0.3)(typescript@4.9.5)):
+  jest-cli@27.5.1(bufferutil@4.1.0)(ts-node@10.9.2(@types/node@24.0.3)(typescript@4.9.5)):
     dependencies:
-      '@jest/core': 27.5.1(ts-node@10.9.2(@types/node@24.0.3)(typescript@4.9.5))
+      '@jest/core': 27.5.1(bufferutil@4.1.0)(ts-node@10.9.2(@types/node@24.0.3)(typescript@4.9.5))
       '@jest/test-result': 27.5.1
       '@jest/types': 27.5.1
       chalk: 4.1.2
       exit: 0.1.2
       graceful-fs: 4.2.11
       import-local: 3.2.0
-      jest-config: 27.5.1(ts-node@10.9.2(@types/node@24.0.3)(typescript@4.9.5))
+      jest-config: 27.5.1(bufferutil@4.1.0)(ts-node@10.9.2(@types/node@24.0.3)(typescript@4.9.5))
       jest-util: 27.5.1
       jest-validate: 27.5.1
       prompts: 2.4.2
@@ -16619,7 +16658,7 @@ snapshots:
       - ts-node
       - utf-8-validate
 
-  jest-config@27.5.1(ts-node@10.9.2(@types/node@24.0.3)(typescript@4.9.5)):
+  jest-config@27.5.1(bufferutil@4.1.0)(ts-node@10.9.2(@types/node@24.0.3)(typescript@4.9.5)):
     dependencies:
       '@babel/core': 7.28.5
       '@jest/test-sequencer': 27.5.1
@@ -16631,13 +16670,13 @@ snapshots:
       glob: 7.2.3
       graceful-fs: 4.2.11
       jest-circus: 27.5.1
-      jest-environment-jsdom: 27.5.1
+      jest-environment-jsdom: 27.5.1(bufferutil@4.1.0)
       jest-environment-node: 27.5.1
       jest-get-type: 27.5.1
       jest-jasmine2: 27.5.1
       jest-regex-util: 27.5.1
       jest-resolve: 27.5.1
-      jest-runner: 27.5.1
+      jest-runner: 27.5.1(bufferutil@4.1.0)
       jest-util: 27.5.1
       jest-validate: 27.5.1
       micromatch: 4.0.8
@@ -16679,7 +16718,7 @@ snapshots:
       jest-util: 27.5.1
       pretty-format: 27.5.1
 
-  jest-environment-jsdom@27.5.1:
+  jest-environment-jsdom@27.5.1(bufferutil@4.1.0):
     dependencies:
       '@jest/environment': 27.5.1
       '@jest/fake-timers': 27.5.1
@@ -16687,7 +16726,7 @@ snapshots:
       '@types/node': 24.0.3
       jest-mock: 27.5.1
       jest-util: 27.5.1
-      jsdom: 16.7.0
+      jsdom: 16.7.0(bufferutil@4.1.0)
     transitivePeerDependencies:
       - bufferutil
       - canvas
@@ -16827,7 +16866,7 @@ snapshots:
       resolve.exports: 1.1.1
       slash: 3.0.0
 
-  jest-runner@27.5.1:
+  jest-runner@27.5.1(bufferutil@4.1.0):
     dependencies:
       '@jest/console': 27.5.1
       '@jest/environment': 27.5.1
@@ -16839,7 +16878,7 @@ snapshots:
       emittery: 0.8.1
       graceful-fs: 4.2.11
       jest-docblock: 27.5.1
-      jest-environment-jsdom: 27.5.1
+      jest-environment-jsdom: 27.5.1(bufferutil@4.1.0)
       jest-environment-node: 27.5.1
       jest-haste-map: 27.5.1
       jest-leak-detector: 27.5.1
@@ -16964,11 +17003,11 @@ snapshots:
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
-  jest@27.5.1(ts-node@10.9.2(@types/node@24.0.3)(typescript@4.9.5)):
+  jest@27.5.1(bufferutil@4.1.0)(ts-node@10.9.2(@types/node@24.0.3)(typescript@4.9.5)):
     dependencies:
-      '@jest/core': 27.5.1(ts-node@10.9.2(@types/node@24.0.3)(typescript@4.9.5))
+      '@jest/core': 27.5.1(bufferutil@4.1.0)(ts-node@10.9.2(@types/node@24.0.3)(typescript@4.9.5))
       import-local: 3.2.0
-      jest-cli: 27.5.1(ts-node@10.9.2(@types/node@24.0.3)(typescript@4.9.5))
+      jest-cli: 27.5.1(bufferutil@4.1.0)(ts-node@10.9.2(@types/node@24.0.3)(typescript@4.9.5))
     transitivePeerDependencies:
       - bufferutil
       - canvas
@@ -16993,7 +17032,7 @@ snapshots:
     dependencies:
       argparse: 2.0.1
 
-  jsdom@16.7.0:
+  jsdom@16.7.0(bufferutil@4.1.0):
     dependencies:
       abab: 2.0.6
       acorn: 8.15.0
@@ -17020,7 +17059,7 @@ snapshots:
       whatwg-encoding: 1.0.5
       whatwg-mimetype: 2.3.0
       whatwg-url: 8.7.0
-      ws: 7.5.10
+      ws: 7.5.10(bufferutil@4.1.0)
       xml-name-validator: 3.0.0
     transitivePeerDependencies:
       - bufferutil
@@ -17805,13 +17844,13 @@ snapshots:
 
   mini-svg-data-uri@1.4.4: {}
 
-  miniflare@4.20260120.0:
+  miniflare@4.20260120.0(bufferutil@4.1.0):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       sharp: 0.34.5
       undici: 7.18.2
       workerd: 1.20260120.0
-      ws: 8.18.0
+      ws: 8.18.0(bufferutil@4.1.0)
       youch: 4.1.0-beta.10
       zod: 3.25.76
     transitivePeerDependencies:
@@ -18253,7 +18292,16 @@ snapshots:
 
   pend@1.2.0: {}
 
+  pg-cloudflare@1.3.0:
+    optional: true
+
+  pg-connection-string@2.11.0: {}
+
   pg-int8@1.0.1: {}
+
+  pg-pool@3.11.0(pg@8.18.0):
+    dependencies:
+      pg: 8.18.0
 
   pg-protocol@1.11.0: {}
 
@@ -18264,6 +18312,20 @@ snapshots:
       postgres-bytea: 1.0.1
       postgres-date: 1.0.7
       postgres-interval: 1.2.0
+
+  pg@8.18.0:
+    dependencies:
+      pg-connection-string: 2.11.0
+      pg-pool: 3.11.0(pg@8.18.0)
+      pg-protocol: 1.11.0
+      pg-types: 2.2.0
+      pgpass: 1.0.5
+    optionalDependencies:
+      pg-cloudflare: 1.3.0
+
+  pgpass@1.0.5:
+    dependencies:
+      split2: 4.2.0
 
   picocolors@1.0.0: {}
 
@@ -18988,20 +19050,20 @@ snapshots:
       dot-case: 3.0.4
       tslib: 2.8.1
 
-  socket.io-adapter@2.5.6:
+  socket.io-adapter@2.5.6(bufferutil@4.1.0):
     dependencies:
       debug: 4.4.3(supports-color@9.4.0)
-      ws: 8.18.3
+      ws: 8.18.3(bufferutil@4.1.0)
     transitivePeerDependencies:
       - bufferutil
       - supports-color
       - utf-8-validate
 
-  socket.io-client@4.8.3:
+  socket.io-client@4.8.3(bufferutil@4.1.0):
     dependencies:
       '@socket.io/component-emitter': 3.1.2
       debug: 4.4.3(supports-color@9.4.0)
-      engine.io-client: 6.6.4
+      engine.io-client: 6.6.4(bufferutil@4.1.0)
       socket.io-parser: 4.2.5
     transitivePeerDependencies:
       - bufferutil
@@ -19015,14 +19077,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  socket.io@4.8.3:
+  socket.io@4.8.3(bufferutil@4.1.0):
     dependencies:
       accepts: 1.3.8
       base64id: 2.0.0
       cors: 2.8.5
       debug: 4.4.3(supports-color@9.4.0)
-      engine.io: 6.6.5
-      socket.io-adapter: 2.5.6
+      engine.io: 6.6.5(bufferutil@4.1.0)
+      socket.io-adapter: 2.5.6(bufferutil@4.1.0)
       socket.io-parser: 4.2.5
     transitivePeerDependencies:
       - bufferutil
@@ -19071,6 +19133,8 @@ snapshots:
   split2@3.2.2:
     dependencies:
       readable-stream: 3.6.2
+
+  split2@4.2.0: {}
 
   sprintf-js@1.0.3: {}
 
@@ -20201,13 +20265,13 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20260120.0
       '@cloudflare/workerd-windows-64': 1.20260120.0
 
-  wrangler@4.60.0:
+  wrangler@4.60.0(bufferutil@4.1.0):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.4.2
       '@cloudflare/unenv-preset': 2.11.0(unenv@2.0.0-rc.24)(workerd@1.20260120.0)
       blake3-wasm: 2.1.5
       esbuild: 0.27.0
-      miniflare: 4.20260120.0
+      miniflare: 4.20260120.0(bufferutil@4.1.0)
       path-to-regexp: 6.3.0
       unenv: 2.0.0-rc.24
       workerd: 1.20260120.0
@@ -20250,11 +20314,17 @@ snapshots:
       signal-exit: 3.0.7
       typedarray-to-buffer: 3.1.5
 
-  ws@7.5.10: {}
+  ws@7.5.10(bufferutil@4.1.0):
+    optionalDependencies:
+      bufferutil: 4.1.0
 
-  ws@8.18.0: {}
+  ws@8.18.0(bufferutil@4.1.0):
+    optionalDependencies:
+      bufferutil: 4.1.0
 
-  ws@8.18.3: {}
+  ws@8.18.3(bufferutil@4.1.0):
+    optionalDependencies:
+      bufferutil: 4.1.0
 
   xdg-app-paths@5.1.0:
     dependencies:

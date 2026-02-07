@@ -3,7 +3,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 import { getAuthInfoFromCookie } from '@/lib/auth';
-import { TOKEN_CONFIG } from '@/lib/refresh-token';
+import { TOKEN_CONFIG } from '@/lib/token-config';
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
